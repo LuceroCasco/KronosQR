@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Escáner de Código QR</title>
+    <script src="./node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+    <style>
+        body {
+            background: url("https://3.bp.blogspot.com/-PLckrBjhI4Y/V8LI39anpPI/AAAAAAAHUmM/B_AfXep5LfQ1WlNhzFV5bwImbz_DSFywQCLcB/s1600/Convite-Festa-Neon-3.jpg") center center fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 80vh;
+            text-align: center;
+        }
+
+        h1 {
+            -webkit-text-stroke: 0.1px black;
+            color: white;
+            border-bottom: none;
+            margin-bottom: 0;
+            font-size: 36px;
+            font-family: BankGothic;
+            text-shadow: 2px 2px 2px black;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #reader {
+            width: 600px;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <p><br><h1 style="font-family: 'BankGothic';"><b>INGENIERÍA LAND SECURITY 2.0</b></h1></p>
+    <h1 style="font-family: 'BankGothic';"><b>Escáner de Código QR</b></h1>
+
+    <main>
+        <div id="reader"></div>
+        <div id="result"></div>
+    </main>
+
+    <script>
+        const scanner = new Html5QrcodeScanner('reader', { 
+            qrbox: {
+                width: 250,
+                height: 250,
+            },
+            fps: 20,
+        });
+
+        scanner.render(success, error);
+
+        function success(result) {
+            document.getElementById('result').innerHTML = `
+            <h2>Success!</h2>
+            <p><a href="${result}">${result}</a></p>
+            `;
+            scanner.clear();
+            document.getElementById('reader').remove();
+        }
+
+        function error(err) {
+            console.error(err);
+        }
+    </script>
+</body>
+</html>
